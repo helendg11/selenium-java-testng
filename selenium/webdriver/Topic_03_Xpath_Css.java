@@ -91,9 +91,17 @@ public class Topic_03_Xpath_Css {
         driver.findElement(By.id("txtCEmail")).sendKeys("test@gmail.com");
         driver.findElement(By.id("txtPassword")).sendKeys("123456");
         driver.findElement(By.id("txtCPassword")).sendKeys("123456");
+
+        // Enter less than 10 digits in Phone number
         driver.findElement(By.id("txtPhone")).sendKeys("0977766");
         driver.findElement(By.xpath("//button[@type='submit']")).click();
         Assert.assertEquals(driver.findElement(By.id("txtPhone-error")).getText(), "Số điện thoại phải từ 10-11 số.");
+
+        // Incorrect Phone number format
+        driver.findElement(By.id("txtPhone")).clear();
+        driver.findElement(By.id("txtPhone")).sendKeys("83475937498");
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        Assert.assertEquals(driver.findElement(By.id("txtPhone-error")).getText(), "Số điện thoại bắt đầu bằng: 09 - 03 - 012 - 016 - 018 - 019 - 088 - 03 - 05 - 07 - 08");
     }
 
     @AfterClass
